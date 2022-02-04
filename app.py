@@ -6,7 +6,7 @@
 from functions.loadData import loadData
 from functions.wish import greet
 import webbrowser
-import json
+import os
 
 # IMPORTANT VARIABLES
 DEBUGGING = False
@@ -16,18 +16,29 @@ details: dict = loadData("./lib/credentials.json")
 def process(command: str):
     if "open website" in command:
         website = command.replace("open website", "").replace(" ","")
-        if website == "github":
-            webbrowser.open("https://github.com")
-        elif website == "github=myaccount":
-            webbrowser.open("https://github.com/AviralCoder")
-        elif website == "classroom":
-            webbrowser.open("https://classroom.google.com")
-        else:
-            if "https://" in command:
-                webbrowser.open(website)
-            else: 
-                webbrowser.open(f'https://{website}')
+        try:
+            if website == "github":
+                webbrowser.open("https://github.com")
+            elif website == "github=myaccount":
+                webbrowser.open("https://github.com/AviralCoder")
+            elif website == "classroom":
+                webbrowser.open("https://classroom.google.com")
+            else:
+                if "https://" in command:
+                    webbrowser.open(website)
+                else: 
+                    webbrowser.open(f'https://{website}')
+            print("Website should have successfully opened on your default web browser!")
+        except:
+            raise Exception("An error occured")
+    if "calculate" in command:
+        expression = command.replace("calculate", " ").replace(" ", "")
+        print(f"Your answer is {eval(expression)}")
 
+    if "open app" in command:
+        app = command.replace("open website", "").replace(" ","")
+
+        
 
 def main(ai_name: str):
     # credentials
