@@ -12,11 +12,9 @@ def time():
     elif now.hour >= 21 and now.hour < 00:
         return "night"
     elif now.hour >= 00 and now.hour < 5:
-        return "late night"
+        return "morning"
 
 def greet():
     time_ = time().capitalize()
-    if time == "late night":
-        return "Don't you think it is too late. Anyway"
-    else:
+    if time_ != "Night":
         return f"Good {time_}"
