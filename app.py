@@ -5,6 +5,7 @@
 
 from functions.loadData import loadData
 from functions.wish import greet
+from lib.list import app_paths
 import webbrowser
 import os
 
@@ -23,6 +24,10 @@ def process(command: str):
                 webbrowser.open("https://github.com/AviralCoder")
             elif website == "classroom":
                 webbrowser.open("https://classroom.google.com")
+            elif website == "youtube":
+                webbrowser.open("https://youtube.com")
+            elif website == "gmail":
+                webbrowser.open("https://mail.google.com")
             else:
                 if "https://" in command:
                     webbrowser.open(website)
@@ -31,14 +36,21 @@ def process(command: str):
             print("Website should have successfully opened on your default web browser!")
         except:
             raise Exception("An error occured")
+            
     if "calculate" in command:
         expression = command.replace("calculate", " ").replace(" ", "")
         print(f"Your answer is {eval(expression)}")
 
     if "open app" in command:
-        app = command.replace("open website", "").replace(" ","")
-
+        app = command.replace("open app", "").replace(" ","")
+        if ".app" not in app:
+            os.system(f'open {app_paths.get(app)}')
+        else:
+            os.system(f'open /Applications/{app}')
         
+        print("If no error is shown above, the app should have opened")
+
+def feeling()
 
 def main(ai_name: str):
     # credentials
